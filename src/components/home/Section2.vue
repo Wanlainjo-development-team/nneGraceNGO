@@ -1,7 +1,7 @@
 <template>
-  <v-container class="mt-16">
+  <v-container class="my-16">
     <v-row>
-      <v-col cols="12" sm="2">
+      <v-col cols="12" sm="3">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
             <span v-bind="props" :class="isHovering ? 'text-blue' : 'text-grey-darken-4'"
@@ -10,7 +10,7 @@
         </v-hover>
       </v-col>
       <v-divider vertical />
-      <v-col cols="12" sm="9">
+      <v-col cols="12" sm="8">
         <span class="text-grey-darken-4 text-body-1">"Nne-Grace International Foundation: Enhancing Lives Through Grace.
           Bringing Health and Life Opportunities
           to the Underserved. Join Our Mission Today!"</span>
@@ -37,7 +37,7 @@
       <v-col cols="12" sm="5">
         <v-card flat rounded="lg">
           <v-img
-            src="https://res.cloudinary.com/rukkiecodes/image/upload/v1680885250/Nne-Grace/images/WhatsApp_Image_2023-04-06_at_01.17.2712_gi1ccu.jpg" />
+            src="https://res.cloudinary.com/rukkiecodes/image/upload/v1680885250/Nne-Grace/images/WhatsApp_Image_2023-04-06_at_01.17.2712_gi1ccu.jpg" aspect-ratio="1.5" />
         </v-card>
       </v-col>
     </v-row>
@@ -45,7 +45,7 @@
       <v-col cols="12" sm="5">
         <v-card flat rounded="lg">
           <v-img
-            src="https://res.cloudinary.com/rukkiecodes/image/upload/v1680885250/Nne-Grace/images/WhatsApp_Image_2023-04-06_at_01.17.2712_gi1ccu.jpg" />
+            src="https://res.cloudinary.com/rukkiecodes/image/upload/v1680885250/Nne-Grace/images/WhatsApp_Image_2023-04-06_at_01.17.2712_gi1ccu.jpg" aspect-ratio="1.5" />
         </v-card>
       </v-col>
       <v-col cols="12" sm="7" order="1" order-sm="0">

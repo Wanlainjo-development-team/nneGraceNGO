@@ -25,7 +25,7 @@
           <v-card rounded="lg">
             <v-carousel :show-arrows="false" hide-delimiters interval="5000" height="100%" cycle>
               <v-carousel-item v-for="(image, i) in images" :key="i">
-                <v-img :src="image" lazy-src="https://res.cloudinary.com/rukkiecodes/image/upload/v1675307350/chriopractor/placeholder_lnnfrn.jpg" cover />
+                <v-img :src="image" lazy-src="https://res.cloudinary.com/rukkiecodes/image/upload/v1675307350/chriopractor/placeholder_lnnfrn.jpg" cover aspect-ratio="1.5" />
               </v-carousel-item>
             </v-carousel>
           </v-card>
