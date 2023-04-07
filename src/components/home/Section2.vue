@@ -56,6 +56,11 @@
             privileged communities through grace. We strive to bring health and life opportunities to those in need and to
             counteract feelings of hopelessness. Our organization is a non-profit in compliance with 501(c) 3 of the
             Internal Revenue Service.
+            <br>
+            <br>
+            We believe that knowledge is power, information is liberating, and education is the premise of progress in
+            every society and family. Your engagement and donations will give hope, provide knowledge, and impact lives by
+            providing another healthy day to smile for. Thank you for your support!
           </v-card-text>
         </v-card>
       </v-col>
