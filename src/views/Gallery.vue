@@ -32,14 +32,6 @@
       </v-col>
     </v-row>
 
-    <v-carousel cycle show-arrows="hover" hide-delimiters class="my-16">
-      <v-carousel-item v-for="(image, i) in gallery.gallery" :key="i">
-        <v-card rounded="lg" @click="() => { dialog = { active: true, image } }" class="overflow-hidden" height="100%">
-          <v-img :src="image" cover aspect-ratio="1.5" />
-        </v-card>
-      </v-carousel-item>
-    </v-carousel>
-
     <v-row>
       <v-col v-for="(image, i) in gallery.gallery" :key="i" cols="12" sm="4" md="3">
         <v-card rounded="lg" @click="() => { dialog = { active: true, image } }">
