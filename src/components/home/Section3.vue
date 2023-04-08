@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mt-16">
+  <v-container class="my-16">
     <v-row>
       <v-col cols="12" sm="3">
         <v-hover>
