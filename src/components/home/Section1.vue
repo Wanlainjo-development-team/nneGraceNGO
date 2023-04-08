@@ -1,38 +1,44 @@
 <template>
-  <v-container>
-    <v-sheet min-height="91vh" class="d-flex align-center">
-      <v-row>
-        <v-col cols="12" sm="7" order="1" order-sm="0">
-          <v-card flat>
-            <v-card-text class="text-h5 text-sm-h3 text-grey-darken-4 font-weight-bold"
-              style="line-height: 1em;">Nne-Grace International Foundation</v-card-text>
-            <v-card-text class="text-body-1 text-grey-darken-4 font-weight-bold">Enhancing Lives Through
-              Grace</v-card-text>
+  <div class="bg">
+    <v-container>
+      <v-sheet min-height="91vh" class="d-flex align-center" color="transparent">
+        <v-row>
+          <v-col cols="12" sm="7" order="1" order-sm="0">
+            <v-card flat color="transparent">
+              <v-card-text class="text-h5 text-sm-h3 text-white font-weight-bold"
+                style="line-height: 1em;">Nne-Grace International Foundation</v-card-text>
+              <v-card-text class="text-body-1 text-white font-weight-bold">Enhancing Lives Through
+                Grace</v-card-text>
 
-            <v-card-text class="text-body-1 text-grey-darken-4">
-              Welcome to Nne-Grace International Foundation, a non-profit organization dedicated to improving the lives of
-              underserved communities. Our mission is to enhance the life of the community and touch the lives of the less
-              privileged through Grace. With a focus on health and education, we strive to be a countermeasure to
-              hopelessness and provide a path to a better future.
-            </v-card-text>
-            <v-card-text class="text-body-1 text-grey-darken-4">
-              Join us in our mission to serve those in need. Your generosity can make a difference in the lives of those
-              less fortunate. Contact us today to learn more about how you can help.
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="5">
-          <v-card rounded="lg">
-            <v-carousel :show-arrows="false" hide-delimiters interval="5000" height="100%" cycle>
-              <v-carousel-item v-for="(image, i) in images" :key="i">
-                <v-img :src="image" lazy-src="https://res.cloudinary.com/rukkiecodes/image/upload/v1675307350/chriopractor/placeholder_lnnfrn.jpg" cover aspect-ratio="1.5" />
-              </v-carousel-item>
-            </v-carousel>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-sheet>
-  </v-container>
+              <v-card-text class="text-body-1 text-white">
+                Welcome to Nne-Grace International Foundation, a non-profit organization dedicated to improving the lives
+                of
+                underserved communities. Our mission is to enhance the life of the community and touch the lives of the
+                less
+                privileged through Grace. With a focus on health and education, we strive to be a countermeasure to
+                hopelessness and provide a path to a better future.
+              </v-card-text>
+              <v-card-text class="text-body-1 text-white">
+                Join us in our mission to serve those in need. Your generosity can make a difference in the lives of those
+                less fortunate. Contact us today to learn more about how you can help.
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="12" sm="5">
+            <v-card rounded="lg">
+              <v-carousel :show-arrows="false" hide-delimiters interval="5000" height="100%" cycle>
+                <v-carousel-item v-for="(image, i) in images" :key="i">
+                  <v-img :src="image"
+                    lazy-src="https://res.cloudinary.com/rukkiecodes/image/upload/v1675307350/chriopractor/placeholder_lnnfrn.jpg"
+                    cover aspect-ratio="1.5" />
+                </v-carousel-item>
+              </v-carousel>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-sheet>
+    </v-container>
+  </div>
 </template>
 
 <script setup>
@@ -46,3 +52,11 @@ const images = [
   'https://res.cloudinary.com/rukkiecodes/image/upload/v1680885246/Nne-Grace/images/WhatsApp_Image_2023-04-06_at_01.17.23wdq_t15ljx.jpg'
 ]
 </script>
+
+<style scoped>
+.bg {
+  background: linear-gradient(45deg,rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6)), url('https://res.cloudinary.com/rukkiecodes/image/upload/v1680917890/Nne-Grace/images/bg_ggrtsj.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+</style>
