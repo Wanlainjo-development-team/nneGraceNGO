@@ -11,8 +11,8 @@
 
         <template v-slot:append>
             <div class="pa-2">
-                <v-btn to="/contact" block class="bg-blue text-capitalize">
-                    Contact Us
+                <v-btn to="/donate" block class="bg-blue text-capitalize">
+                    Donate
                 </v-btn>
             </div>
         </template>

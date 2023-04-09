@@ -10,7 +10,7 @@
               <v-card-text class="text-body-1 text-white font-weight-bold">Enhancing Lives Through
                 Grace</v-card-text>
 
-              <v-card-text class="text-body-1 text-white">
+              <v-card-text class="text-body-1 text-white font-weight-light">
                 Welcome to Nne-Grace International Foundation, a non-profit organization dedicated to improving the lives
                 of
                 underserved communities. Our mission is to enhance the life of the community and touch the lives of the
@@ -18,7 +18,7 @@
                 privileged through Grace. With a focus on health and education, we strive to be a countermeasure to
                 hopelessness and provide a path to a better future.
               </v-card-text>
-              <v-card-text class="text-body-1 text-white">
+              <v-card-text class="text-body-1 text-white font-weight-light">
                 Join us in our mission to serve those in need. Your generosity can make a difference in the lives of those
                 less fortunate. Contact us today to learn more about how you can help.
               </v-card-text>
