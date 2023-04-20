@@ -5,8 +5,8 @@
         <v-row>
           <v-col cols="12" sm="7" order="1" order-sm="0">
             <v-card flat color="transparent">
-              <v-card-text class="text-h5 text-sm-h3 text-white font-weight-bold"
-                style="line-height: 1em;">Nne-Grace International Foundation</v-card-text>
+              <v-card-text class="text-h5 text-sm-h3 text-white font-weight-bold" style="line-height: 1em;">Nne-Grace
+                International Foundation</v-card-text>
               <v-card-text class="text-body-1 text-white font-weight-bold">Enhancing Lives Through
                 Grace</v-card-text>
 
@@ -33,6 +33,18 @@
                     cover aspect-ratio="1.5" />
                 </v-carousel-item>
               </v-carousel>
+
+              <v-dialog v-model="dialog" width="1000" activator="parent">
+                <v-card rounded="lg">
+                  <v-carousel :show-arrows="false" hide-delimiters interval="5000" height="100%" cycle>
+                    <v-carousel-item v-for="(image, i) in images" :key="i">
+                      <v-img :src="image"
+                        lazy-src="https://res.cloudinary.com/rukkiecodes/image/upload/v1675307350/chriopractor/placeholder_lnnfrn.jpg"
+                        cover aspect-ratio="1.5" />
+                    </v-carousel-item>
+                  </v-carousel>
+                </v-card>
+              </v-dialog>
             </v-card>
           </v-col>
         </v-row>
@@ -42,6 +54,9 @@
 </template>
 
 <script setup>
+import { ref } from "vue"
+
+const dialog = ref(false)
 const images = [
   'https://res.cloudinary.com/rukkiecodes/image/upload/v1680885247/Nne-Grace/images/WhatsApp_Image_2023-04-06_at_01.17.281_kt5hyp.jpg',
   'https://res.cloudinary.com/rukkiecodes/image/upload/v1680885251/Nne-Grace/images/WhatsApp_Image_2023-04-06_at_01.17.17213d_vcguor.jpg',
@@ -55,7 +70,7 @@ const images = [
 
 <style scoped>
 .bg {
-  background: linear-gradient(45deg,rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6)), url('https://res.cloudinary.com/rukkiecodes/image/upload/v1680917890/Nne-Grace/images/bg_ggrtsj.jpg') no-repeat;
+  background: linear-gradient(45deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6)), url('https://res.cloudinary.com/rukkiecodes/image/upload/v1680917890/Nne-Grace/images/bg_ggrtsj.jpg') no-repeat;
   background-size: cover;
   background-position: center;
 }
