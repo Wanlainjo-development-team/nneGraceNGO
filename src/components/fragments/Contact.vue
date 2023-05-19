@@ -6,22 +6,22 @@
                 <v-card-text>
                     <v-row dense>
                         <v-col cols="12" sm="6">
-                            <v-text-field label="Your name" variant="underlined" />
+                            <v-text-field v-model="message.name" label="Your name" variant="underlined" />
                         </v-col>
                         <v-col cols="12" sm="6">
-                            <v-text-field label="Your email" variant="underlined" />
+                            <v-text-field v-model="message.email" label="Your email" variant="underlined" />
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field label="Subject" variant="underlined" />
+                            <v-text-field v-model="message.subject" label="Subject" variant="underlined" />
                         </v-col>
                         <v-col cols="12">
-                            <v-textarea label="Your message" rows="3" auto-grow variant="underlined" />
+                            <v-textarea v-model="message.message" label="Your message" rows="3" auto-grow variant="underlined" />
                         </v-col>
                     </v-row>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer />
-                    <v-btn class="bg-blue px-4" rounded="lg" size="large">Submit</v-btn>
+                    <v-btn :loading="message.loading" @click="message.sendMessage" class="bg-blue px-4" rounded="lg" size="large">Submit</v-btn>
                 </v-card-actions>
             </v-card>
         </v-col>
@@ -71,9 +71,9 @@
 </template>
   
 <script setup>
-import { useBlogStore } from '@/store/blog';
+import { useMessageStore } from '@/store/message';
 
-const blogs = useBlogStore()
+const message = useMessageStore()
 
 const openWebsite = () => window.open('http://nnegrace.org')
 </script>
