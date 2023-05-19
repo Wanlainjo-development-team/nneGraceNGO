@@ -48,6 +48,49 @@ const routes = [
       },
     ],
   },
+
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('@/layouts/admin/Default.vue'),
+
+    children: [
+      {
+        path: '',
+        name: 'login',
+        component: () => import('@/views/admin/Login.vue')
+      },
+
+      {
+        path: 'dashboard',
+        name: 'admin.dashboard',
+        component: () => import('@/layouts/admin/Dashboard.vue'),
+        
+        children: [
+          {
+            path: '',
+            name: 'admin.dashboard.overview',
+            component: () => import('@/views/admin/dashboard/Overview.vue')
+          },
+          {
+            path: 'overview',
+            name: 'admin.dashboard.overview',
+            component: () => import('@/views/admin/dashboard/Overview.vue')
+          },
+          {
+            path: 'blog',
+            name: 'admin.dashboard.blog',
+            component: () => import('@/views/admin/dashboard/Blog.vue')
+          },
+          {
+            path: 'gallery',
+            name: 'admin.dashboard.gallery',
+            component: () => import('@/views/admin/dashboard/Gallery.vue')
+          }
+        ]
+      }
+    ]
+  }
 ]
 
 const router = createRouter({
