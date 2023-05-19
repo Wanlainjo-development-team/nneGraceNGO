@@ -3,6 +3,9 @@ import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
+    snackText: '',
+    snackbar: false,
+    snackColor: 'indigo',
     nav: [
       { to: 'home', title: 'Home' },
       { to: 'about', title: 'About' },
