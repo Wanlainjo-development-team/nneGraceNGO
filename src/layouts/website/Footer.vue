@@ -9,5 +9,5 @@
 </template>
 
 <script setup>
-import Map from '@/components/fragments/Map.vue'
+import Map from '@/components/website/fragments/Map.vue'
 </script>

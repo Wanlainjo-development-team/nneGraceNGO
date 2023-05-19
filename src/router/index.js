@@ -4,47 +4,47 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    component: () => import('@/layouts/Default.vue'),
+    component: () => import('@/layouts/website/Default.vue'),
     children: [
       {
         path: '',
         name: 'Home',
-        component: () => import('@/views/Home.vue'),
+        component: () => import('@/views/website/Home.vue'),
       },
       {
         path: 'home',
         name: 'Home.home',
-        component: () => import('@/views/Home.vue'),
+        component: () => import('@/views/website/Home.vue'),
       },
       {
         path: 'about',
         name: 'About',
-        component: () => import('@/views/About.vue'),
+        component: () => import('@/views/website/About.vue'),
       },
       {
         path: 'blog',
         name: 'Blog',
-        component: () => import('@/views/Blog.vue'),
+        component: () => import('@/views/website/Blog.vue'),
       },
       {
         path: 'contact',
         name: 'Contact',
-        component: () => import('@/views/Contact.vue'),
+        component: () => import('@/views/website/Contact.vue'),
       },
       {
         path: 'donate',
         name: 'Donate',
-        component: () => import('@/views/Donate.vue'),
+        component: () => import('@/views/website/Donate.vue'),
       },
       {
         path: 'events',
         name: 'Events',
-        component: () => import('@/views/Events.vue'),
+        component: () => import('@/views/website/Events.vue'),
       },
       {
         path: 'gallery',
         name: 'Gallery',
-        component: () => import('@/views/Gallery.vue'),
+        component: () => import('@/views/website/Gallery.vue'),
       },
     ],
   },

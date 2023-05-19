@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-import Contact from '@/components/fragments/Contact.vue'
+import Contact from '@/components/website/fragments/Contact.vue'
 </script>
