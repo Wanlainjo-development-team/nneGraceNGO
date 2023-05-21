@@ -59,16 +59,12 @@ export const useBlogStore = defineStore('blog', {
             const q = query(collection(db, "posts"));
 
             const unsubscribe = onSnapshot(q, querySnapshot => {
-                // this.blog = [...this.blog, doc.docs]
+                this.blog = []
                 querySnapshot.forEach((doc) => {
                     this.blog.unshift({
                         id: doc.id,
                         ...doc.data()
                     })
-                    // this.blog.push({
-                    //     id: doc.id,
-                    //     ...doc
-                    // });
                 });
                 console.log("Current cities in CA: ", [...this.blog]);
             });

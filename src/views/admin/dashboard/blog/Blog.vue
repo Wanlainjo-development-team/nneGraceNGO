@@ -56,11 +56,17 @@
         {{ blog?.post }}
       </v-card-text>
     </v-card>
+
+    <v-btn @click="deleteBlog" :loading="deleteLoading" position="fixed" location="bottom right"
+      class="text-capitalize ma-4 bg-red" size="large" rounded="pill">
+      <v-icon class="mr-2">mdi-trash-can</v-icon>
+      Delete Post
+    </v-btn>
   </v-container>
 </template>
 
 <script>
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '@/plugins/firebase';
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 export default {
@@ -72,6 +78,7 @@ export default {
     postLoading: false,
     disableImageButton: false,
     imageButtonLoading: false,
+    deleteLoading: false,
     image: null,
     newBlog: {
       caption: '',
@@ -170,6 +177,17 @@ export default {
             console.log(error)
           })
       }
+    },
+
+    deleteBlog() {
+      this.deleteLoading = true
+      const storage = getStorage()
+      deleteObject(ref(storage, this.blog.imageLink))
+        .then(async () => {
+          await deleteDoc(doc(db, 'posts', this.$route.params.id))
+          this.deleteLoading = false
+          this.$router.go(-1)
+        })
     }
   }
 }
