@@ -40,7 +40,7 @@
               <span>{{ new Date(blog.createdAt.seconds).toDateString() }}</span>
             </v-chip>
           </v-card-text>
-          <v-card-text>{{ blog.post?.slice(0, 100) }}...<v-btn variant="text" :ripple="false"
+          <v-card-text>{{ blog.post?.slice(0, 100) }}...<v-btn :to="`/admin/dashboard/blog/${blog.id}`" variant="text" :ripple="false"
               class="text-capitalize px-0">Read more</v-btn></v-card-text>
         </v-card>
       </v-col>
