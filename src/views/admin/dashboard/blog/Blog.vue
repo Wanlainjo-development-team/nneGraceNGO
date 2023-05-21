@@ -1,7 +1,14 @@
 <template>
   <v-container>
     <v-card width="600" class="mx-auto">
-      <v-img :src="blog?.image" cover />
+      <v-img :src="blog?.image" cover>
+        <v-btn @click="openInput" :disabled="disableImageButton" :loading="imageButtonLoading" position="absolute"
+          location="bottom right" class="ma-4 text-capitalize" rounded="pill">
+          <v-icon class="mr-2">mdi-pencil</v-icon>
+          Edit Image
+        </v-btn>
+        <input @change="setImage" type="file" id="fileInput" style="display: none;" />
+      </v-img>
 
       <v-card-title>
         {{ blog?.caption }}
@@ -40,8 +47,8 @@
               </v-card-text>
               <v-card-actions>
                 <v-btn @click="postDialog = false" style="flex: 1;" class="text-capitalize">Cancel</v-btn>
-                <v-btn @click="editPost" :loading="postLoading" style="flex: 1;"
-                  class="bg-blue text-capitalize">Save Post</v-btn>
+                <v-btn @click="editPost" :loading="postLoading" style="flex: 1;" class="bg-blue text-capitalize">Save
+                  Post</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -55,6 +62,7 @@
 <script>
 import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '@/plugins/firebase';
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 export default {
   data: () => ({
     blog: null,
@@ -62,6 +70,8 @@ export default {
     captionLoading: false,
     postDialog: false,
     postLoading: false,
+    disableImageButton: false,
+    imageButtonLoading: false,
     image: null,
     newBlog: {
       caption: '',
@@ -109,6 +119,57 @@ export default {
 
       this.postLoading = false
       this.postDialog = false
+    },
+
+    openInput() {
+      document.querySelector('#fileInput').click()
+    },
+
+    setImage(e) {
+      let file = e.target.files[0]
+
+      if (!file) return
+
+      this.imageButtonLoading = true
+      this.disableImageButton = true
+
+      const storage = getStorage()
+
+      let link = `posts/${file.name}`
+
+      const storageRef = ref(storage, link)
+
+      const uploadTask = uploadBytesResumable(storageRef, file)
+
+      const upload = () => {
+        uploadTask.on('state_changed', snapshot => { },
+          error => { },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref)
+              .then(async downloadURL => {
+                await updateDoc(doc(db, 'posts', this.$route.params.id), {
+                  image: downloadURL,
+                  imageLink: uploadTask.snapshot.ref.fullPath
+                })
+
+                this.imageButtonLoading = false
+                this.disableImageButton = false
+              })
+          })
+      }
+
+      if (this.blog.image == undefined || this.blog.image == null) {
+        upload()
+      } else {
+        const imageRef = ref(storage, this.blog.imageLink)
+
+        deleteObject(imageRef)
+          .then(() => {
+            upload()
+          }).catch(error => {
+            console.log(error)
+          })
+      }
     }
   }
 }
