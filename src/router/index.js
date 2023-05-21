@@ -80,7 +80,20 @@ const routes = [
           {
             path: 'blog',
             name: 'admin.dashboard.blog',
-            component: () => import('@/views/admin/dashboard/Blog.vue')
+            component: () => import('@/views/admin/dashboard/blog/BlogView.vue'),
+            
+            children: [
+              {
+                path: '',
+                name: 'admin.dashboard.blog.blogs',
+                component: () => import('@/views/admin/dashboard/blog/Blogs.vue')
+              },
+              {
+                path: ':id',
+                name: 'admin.dashboard.blog.blog',
+                component: () => import('@/views/admin/dashboard/blog/Blog.vue')
+              },
+            ]
           },
           {
             path: 'gallery',

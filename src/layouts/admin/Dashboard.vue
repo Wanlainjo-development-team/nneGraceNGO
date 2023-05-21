@@ -16,7 +16,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { useBlogStore } from "@/store/blog";
+import { onMounted, ref } from "vue";
+
+const blog = useBlogStore()
+
+onMounted(() => {
+    blog.getBlogPosts()
+})
 
 const routes = ref([
     {
