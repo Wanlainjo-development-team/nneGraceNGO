@@ -66,7 +66,6 @@ export const useBlogStore = defineStore('blog', {
                         ...doc.data()
                     })
                 });
-                console.log("Current cities in CA: ", [...this.blog]);
             });
 
             return unsubscribe
