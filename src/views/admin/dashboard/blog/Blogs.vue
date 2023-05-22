@@ -1,10 +1,10 @@
 <template>
   <v-container fluid>
-    <v-sheet class="d-flex flex-column align-center justify-center" height="80vh">
+    <v-sheet v-if="blogs.blog.length < 1" class="d-flex flex-column align-center justify-center" height="80vh">
       <v-icon size="100" color="grey-darken-2">mdi-dropbox</v-icon>
-      <span class="text-grey-darken-3">You yand not made any post yet</span>
+      <span class="text-grey-darken-3">You have not made any post yet</span>
     </v-sheet>
-    <v-row>
+    <v-row v-else>
       <v-col v-for="blog in blogs.blog" :key="blog.id" cols="12" sm="6" md="4">
         <v-card rounded="lg">
           <v-img :src="blog.image" aspect-ratio="1.5" cover />
@@ -23,12 +23,12 @@
 
     <v-btn color="blue" position="fixed" location="bottom right" rounded="pill" class="text-capitalize ma-4" size="large">
       <v-icon size="x-large">mdi-plus</v-icon>
-      <span>Add new blog post</span>
+      <span>Add new post</span>
 
       <v-dialog v-model="blogs.dialog" activator="parent" width="400">
         <v-card>
           <v-toolbar density="compact" color="transparent">
-            <v-toolbar-title class="text-body-1 font-weight-bold">Add new post</v-toolbar-title>
+            <v-toolbar-title class="text-body-1">Add new post</v-toolbar-title>
             <v-spacer />
             <v-btn @click="blogs.dialog = false" icon size="small">
               <v-icon>mdi-close</v-icon>

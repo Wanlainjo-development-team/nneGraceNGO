@@ -65,7 +65,7 @@ const routes = [
         path: 'dashboard',
         name: 'admin.dashboard',
         component: () => import('@/layouts/admin/Dashboard.vue'),
-        
+
         children: [
           {
             path: '',
@@ -81,7 +81,7 @@ const routes = [
             path: 'blog',
             name: 'admin.dashboard.blog',
             component: () => import('@/views/admin/dashboard/blog/BlogView.vue'),
-            
+
             children: [
               {
                 path: '',

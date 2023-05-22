@@ -17,12 +17,15 @@
 
 <script setup>
 import { useBlogStore } from "@/store/blog";
+import { useGelleryStore } from "@/store/gellery";
 import { onMounted, ref } from "vue";
 
 const blog = useBlogStore()
+const gallery = useGelleryStore()
 
 onMounted(() => {
     blog.getBlogPosts()
+    gallery.getGalleryImages()
 })
 
 const routes = ref([
