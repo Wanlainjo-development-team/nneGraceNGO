@@ -19,18 +19,20 @@
     <v-divider class="my-5" />
     <v-row>
       <v-col v-for="(image, i) in gallery.gallery.slice(0, 12)" :key="i" cols="12" sm="4" md="3">
-        <v-card rounded="lg" @click="() => { dialog = { active: true, image } }">
-          <v-img :src="image" cover aspect-ratio="1.5" />
+        <v-card rounded="lg" @click="() => { dialog = { active: true, image: image.image } }">
+          <v-img :src="image.image" cover aspect-ratio="1.5" />
         </v-card>
       </v-col>
     </v-row>
 
-    <v-dialog v-model="dialog.active" width="600">
+    <v-dialog v-model="dialog.active" width="600" scrollable>
       <v-card rounded="lg">
-        <v-img :src="dialog.image" />
+        <v-card-text style="max-height;: 700px" class="ma-0 pa-0">
+          <v-img :src="dialog.image" cover />
+        </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn @click="dialog.active = false">Close</v-btn>
+          <v-btn class="text-capitalize" @click="dialog.active = false">Close</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
