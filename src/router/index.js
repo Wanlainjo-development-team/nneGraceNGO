@@ -99,7 +99,25 @@ const routes = [
             path: 'gallery',
             name: 'admin.dashboard.gallery',
             component: () => import('@/views/admin/dashboard/Gallery.vue')
-          }
+          },
+          {
+            path: 'message',
+            name: 'admin.dashboard.message',
+            component: () => import('@/views/admin/dashboard/message/MessageView.vue'),
+
+            children: [
+              {
+                path: '',
+                name: 'admin.dashboard.message.messages',
+                component: () => import('@/views/admin/dashboard/message/Messages.vue')
+              },
+              {
+                path: ':id',
+                name: 'admin.dashboard.message.message',
+                component: () => import('@/views/admin/dashboard/message/Message.vue')
+              },
+            ]
+          },
         ]
       }
     ]

@@ -18,14 +18,17 @@
 <script setup>
 import { useBlogStore } from "@/store/blog";
 import { useGelleryStore } from "@/store/gellery";
+import { useMessageStore } from "@/store/message";
 import { onMounted, ref } from "vue";
 
 const blog = useBlogStore()
 const gallery = useGelleryStore()
+const message = useMessageStore()
 
 onMounted(() => {
     blog.getBlogPosts()
     gallery.getGalleryImages()
+    message.getMessages()
 })
 
 const routes = ref([
@@ -40,6 +43,10 @@ const routes = ref([
     {
         title: 'Gallery',
         to: '/admin/dashboard/gallery'
+    },
+    {
+        title: 'message',
+        to: '/admin/dashboard/message'
     }
 ])
 </script>

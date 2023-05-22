@@ -5,7 +5,7 @@ import { useAppStore } from './app'
 
 const app = useAppStore()
 
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/plugins/firebase'
 
 export const useMessageStore = defineStore('message', {
@@ -14,7 +14,8 @@ export const useMessageStore = defineStore('message', {
         email: '',
         subject: '',
         message: '',
-        loading: false
+        loading: false,
+        messages: []
     }),
 
     actions: {
@@ -26,7 +27,9 @@ export const useMessageStore = defineStore('message', {
                 name: this.name,
                 email: this.email,
                 subject: this.subject,
-                message: this.message
+                message: this.message,
+                read: false,
+                createdAt: serverTimestamp()
             })
 
             this.loading = false
@@ -34,6 +37,22 @@ export const useMessageStore = defineStore('message', {
             app.snackbar = true
             app.snackText = 'Message sent successfully'
             app.snackColor = 'green'
+        },
+
+        getMessages() {
+            const q = query(collection(db, "messages"));
+
+            const unsubscribe = onSnapshot(q, querySnapshot => {
+                this.messages = []
+                querySnapshot.forEach((doc) => {
+                    this.messages.unshift({
+                        id: doc.id,
+                        ...doc.data()
+                    })
+                });
+            });
+
+            return unsubscribe
         }
     }
 })
