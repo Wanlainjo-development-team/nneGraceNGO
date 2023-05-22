@@ -1,6 +1,6 @@
 // Utilities
 import { db } from '@/plugins/firebase'
-import { addDoc, collection, onSnapshot, query, serverTimestamp } from 'firebase/firestore'
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { defineStore } from 'pinia'
 import { useAppStore } from './app'
@@ -10,51 +10,57 @@ const app = useAppStore()
 export const useGelleryStore = defineStore('gellery', {
     state: () => ({
         dialog: false,
-        image: null,
-        type: 'image',
+        image: [],
         loading: false,
         gallery: []
     }),
 
     actions: {
         saveImage() {
-            if (!this.image || this.type == '') return
+            if (this.image >= 1) return
 
-            let file = this.image
+            const files = this.image
 
             const storage = getStorage()
 
-            let link = `gallery/${this.image.name}`
+            const uploadImage = file => {
 
-            const storageRef = ref(storage, link)
+                let link = `gallery/${file.name}`
 
-            const uploadTask = uploadBytesResumable(storageRef, file)
+                const storageRef = ref(storage, link)
 
-            this.loading = true
+                const uploadTask = uploadBytesResumable(storageRef, file)
 
-            uploadTask.on('state_changed', snapshot => { }, error => { },
-                () => {
-                    getDownloadURL(uploadTask.snapshot.ref)
-                        .then(async downloadURL => {
-                            await addDoc(collection(db, 'gallery'), {
-                                image: downloadURL,
-                                imageLink: uploadTask.snapshot.ref.fullPath,
-                                type: this.type,
-                                createdAt: serverTimestamp()
+                // this.loading = true
+
+                uploadTask.on('state_changed', snapshot => { }, error => { },
+                    () => {
+                        getDownloadURL(uploadTask.snapshot.ref)
+                            .then(async downloadURL => {
+                                await addDoc(collection(db, 'gallery'), {
+                                    image: downloadURL,
+                                    imageLink: uploadTask.snapshot.ref.fullPath,
+                                    createdAt: serverTimestamp()
+                                })
+
+                                // this.loading = false
+                                this.dialog = false
+
+                                // app.snackbar = true
+                                // app.snackColor = 'green'
+                                // app.snackText = 'Image saved successfully'
                             })
+                    })
+            }
 
-                            this.loading = false
-                            this.dialog = false
-
-                            app.snackbar = true
-                            app.snackColor = 'green'
-                            app.snackText = 'Image saved successfully'
-                        })
-                })
+            files.forEach(file => {
+                uploadImage(file)
+                // console.log('file: ', file)
+            })
         },
 
         getGalleryImages() {
-            const q = query(collection(db, "gallery"));
+            const q = query(collection(db, "gallery"), orderBy('createdAt', 'asc'));
 
             const unsubscribe = onSnapshot(q, querySnapshot => {
                 this.gallery = []

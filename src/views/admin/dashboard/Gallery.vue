@@ -13,22 +13,20 @@
     </v-row>
 
     <v-btn color="blue" position="fixed" location="bottom right" rounded="pill" class="text-capitalize ma-4" size="large">
-      <v-icon size="x-large">mdi-plus</v-icon>
+      <v-icon size="x-large" class="mr-2">mdi-plus</v-icon>
       <span>Add image</span>
 
       <v-dialog v-model="galleries.dialog" activator="parent" width="400">
         <v-card>
           <v-toolbar density="compact" color="transparent">
-            <v-toolbar-title class="text-body-1">Add new post</v-toolbar-title>
+            <v-toolbar-title class="text-body-1">Add new image</v-toolbar-title>
             <v-spacer />
             <v-btn @click="galleries.dialog = false" icon size="small">
               <v-icon>mdi-close</v-icon>
             </v-btn>
           </v-toolbar>
           <v-card-text>
-            <v-file-input @change="setImage" label="Image" color="blue" variant="underlined" />
-            <v-select v-model="galleries.type" :items="['image', 'video']" label="Media type" color="blue"
-              variant="underlined" />
+            <v-file-input @change="setImage" label="Select images" color="blue" variant="underlined" multiple />
           </v-card-text>
 
           <v-card-actions>
@@ -44,9 +42,10 @@
       <v-img :src="activeDialog?.image" cover />
       <input @change="saveImage" type="file" id="gallerImageFile" style="display: none;">
       <v-card-actions>
-        <v-spacer />
-        <v-btn color="red" class="text-capitalize">Delete</v-btn>
+        <v-btn @click="deleteBlog" :loading="deleteButtonLoading" color="red" class="text-capitalize">Delete</v-btn>
         <v-btn @click="clickInput" :loading="editButtonLoading" class="bg-blue text-capitalize">Edit</v-btn>
+        <v-spacer />
+        <v-btn @click="activeDialog.active = false" class="text-capitalize">Close</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -55,7 +54,7 @@
 <script setup>
 import { db } from "@/plugins/firebase";
 import { useGelleryStore } from "@/store/gellery";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { ref as vRef } from "vue";
 
@@ -69,10 +68,10 @@ let activeDialog = vRef({
 })
 
 const setImage = e => {
-  let file = e.target.files[0]
+  let file = e.target.files
   if (!file) return
 
-  galleries.value.image = file
+  galleries.value.image = [...file]
 }
 
 const setActiveDialog = prop => {
@@ -130,5 +129,20 @@ const saveImage = e => {
         console.log(error)
       })
   }
+}
+
+const deleteBlog = () => {
+  deleteButtonLoading.value = true
+  const storage = getStorage()
+  deleteObject(ref(storage, activeDialog.value.imageLink))
+    .then(async () => {
+      await deleteDoc(doc(db, 'gallery', activeDialog.value.id))
+      deleteButtonLoading.value = false
+      activeDialog.value.active = false
+    }).catch(async () => {
+      await deleteDoc(doc(db, 'gallery', activeDialog.value.id))
+      deleteButtonLoading.value = false
+      activeDialog.value.active = false
+    })
 }
 </script>
