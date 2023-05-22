@@ -14,7 +14,7 @@
     <v-btn v-for="(route, i) in app.nav" :key="i" :to="route.to" rounded="lg"
       class="hidden-md-and-down ml-2 text-capitalize">{{ route.title
       }}</v-btn>
-    <v-btn to="/donate" class="bg-blue ml-2">Donate</v-btn>
+    <!-- <v-btn to="/donate" class="bg-blue ml-2">Donate</v-btn> -->
 
     <v-app-bar-nav-icon @click="app.drawer = !app.drawer" variant="text" class="hidden-lg-and-up ml-2 rounded-lg" />
   </v-app-bar>

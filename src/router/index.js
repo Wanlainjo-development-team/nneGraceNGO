@@ -23,8 +23,21 @@ const routes = [
       },
       {
         path: 'blog',
-        name: 'Blog',
-        component: () => import('@/views/website/Blog.vue'),
+        name: 'website.blog',
+        component: () => import('@/views/website/blog/BlogView.vue'),
+
+        children: [
+          {
+            path: '',
+            name: 'website.blog.blogs',
+            component: () => import('@/views/website/blog/Blogs.vue')
+          },
+          {
+            path: ':id',
+            name: 'website.blog.blog',
+            component: () => import('@/views/website/blog/Blog.vue')
+          },
+        ]
       },
       {
         path: 'contact',
